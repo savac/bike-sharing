@@ -61,22 +61,24 @@ with open(csv_file,'r') as csvin, open(txt_file,'w') as txtout:
 		# datetime
 		t = row[0].split(' ')
 		t = t[1].split(':')
-		to_write+=' |' + cats[0] + ' ' + t[0]
+		#to_write+=' |' + cats[0] + ' ' + t[0]
+		to_write+=' |' + 'time ' + str(int(t[0]))
+
 		
 		# season, holiday, working day, weather (categorial)
-		#for i in range(1, 5):
-		#	to_write+=' |' + cats[i] + ' ' + row[i]
+		for i in range(1, 5):
+			to_write+=' |' + cats[i] + ' ' + row[i]
 		
 		# temp, atemp, humidity, windspeed (numeric)
 		to_write+=' |numerical'
-		for i in range(1, 9):
+		for i in range(5, 9):
 			to_write+=' ' + cats[i].strip('\n') + ':' + row[i]
 		
 		# casual, registered (numerical, not in test set)
-		if not(test):
-			to_write+=' |extra'
-			for i in range(9, 11):
-				to_write+=' ' + cats[i] + ':' + row[i]
+		#if not(test):
+		#	#to_write+=' |extra'
+		#	for i in range(9, 11):
+		#		to_write+=' ' + cats[i] + ':' + row[i]
 		
 		
 		txtout.write(to_write + '\n')
