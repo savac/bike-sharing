@@ -62,12 +62,12 @@ with open(csv_file,'r') as csvin, open(txt_file,'w') as txtout:
 		t = row[0].split(' ')
 		t = t[1].split(':')
 		#to_write+=' |' + cats[0] + ' ' + t[0]
-		to_write+=' |' + 'time ' + str(int(t[0]))
+		to_write+=' |categorial ' + 't' + str(int(t[0]))
 
 		
 		# season, holiday, working day, weather (categorial)
 		for i in range(1, 5):
-			to_write+=' |' + cats[i] + ' ' + row[i]
+			to_write+=' ' + cats[i][0:2] + row[i]
 		
 		# temp, atemp, humidity, windspeed (numeric)
 		to_write+=' |numerical'
