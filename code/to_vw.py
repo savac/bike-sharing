@@ -11,6 +11,7 @@ txt_file = '../data/test.txt' # File for VW (TXT)
 from os.path import isfile
 import sys
 import csv
+from datetime import datetime
 
 '''
 0 datetime - hourly date + timestamp  
@@ -58,13 +59,23 @@ with open(csv_file,'r') as csvin, open(txt_file,'w') as txtout:
 		else:
 			to_write = row[11] # get the prediction
 
+		to_write+=' |categorial'
+
 		# datetime
 		t = row[0].split(' ')
-		t = t[1].split(':')
-		#to_write+=' |' + cats[0] + ' ' + t[0]
-		to_write+=' |categorial ' + 't' + str(int(t[0]))
-
 		
+		# day
+		d = t[0].split('-')
+		d = datetime(int(d[0]),int(d[1]),int(d[2]))
+		month = d.strftime("%B")
+		to_write += ' ' + month
+		day = d.strftime("%A")
+		to_write += ' ' + day
+		
+		#hour
+		t = t[1].split(':')
+		to_write+=' h' + str(int(t[0]))
+
 		# season, holiday, working day, weather (categorial)
 		for i in range(1, 5):
 			to_write+=' ' + cats[i][0:2] + row[i]
